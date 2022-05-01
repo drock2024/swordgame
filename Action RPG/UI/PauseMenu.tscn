@@ -1,0 +1,139 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://UI/PauseMenu.gd" type="Script" id=2]
+[ext_resource path="res://UI/SliderOver.png" type="Texture" id=3]
+[ext_resource path="res://UI/SliderProgress.png" type="Texture" id=4]
+[ext_resource path="res://UI/SliderUnder.png" type="Texture" id=5]
+[ext_resource path="res://UI/ToggleOn.png" type="Texture" id=6]
+[ext_resource path="res://UI/ToggleOff.png" type="Texture" id=7]
+[ext_resource path="res://Camera2D.tscn" type="PackedScene" id=8]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.286275, 0.764706, 0.282353, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[node name="PauseMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 8.0
+margin_top = 14.0
+margin_right = 124.0
+margin_bottom = 74.0
+custom_constants/separation = 32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MasterVolume" type="Label" parent="VBoxContainer"]
+margin_right = 116.0
+margin_bottom = 14.0
+text = "Master Volume:"
+
+[node name="Fullscreen" type="Label" parent="VBoxContainer"]
+margin_top = 46.0
+margin_right = 116.0
+margin_bottom = 60.0
+text = "Enable Fullscreen:"
+
+[node name="MainMenu" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -320.0
+margin_top = 40.0
+margin_right = -236.0
+margin_bottom = 60.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+text = "Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackToGame" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -88.0
+margin_right = -4.0
+margin_bottom = 20.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 4 )
+text = "Resume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -320.0
+margin_top = 72.0
+margin_right = -236.0
+margin_bottom = 92.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 5 )
+text = "Quit Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VolumeSlider" type="TextureProgress" parent="."]
+anchor_left = 0.4
+anchor_top = 0.356
+anchor_right = 0.4
+anchor_bottom = 0.356
+margin_top = 39.92
+margin_right = 128.0
+margin_bottom = 71.92
+min_value = -80.0
+max_value = -20.0
+value = -30.0
+texture_under = ExtResource( 5 )
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnableFullscreen" type="CheckButton" parent="."]
+margin_left = 128.0
+margin_top = 136.0
+margin_right = 204.0
+margin_bottom = 176.0
+custom_icons/off = ExtResource( 7 )
+custom_icons/on = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Camera2D" parent="." instance=ExtResource( 8 )]
+
+[node name="BottomRight" parent="Camera2D/Limits" index="1"]
+position = Vector2( 320, 192 )
+[connection signal="pressed" from="MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="pressed" from="BackToGame" to="." method="_on_BackToGame_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
+[connection signal="mouse_entered" from="VolumeSlider" to="." method="_on_VolumeSlider_mouse_entered"]
+[connection signal="mouse_exited" from="VolumeSlider" to="." method="_on_VolumeSlider_mouse_exited"]
+[connection signal="toggled" from="EnableFullscreen" to="." method="_on_EnableFullscreen_toggled"]
+
+[editable path="Camera2D"]

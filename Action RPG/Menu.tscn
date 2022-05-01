@@ -1,0 +1,354 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://World/GrassBackground.png" type="Texture" id=1]
+[ext_resource path="res://Menu.gd" type="Script" id=2]
+[ext_resource path="res://Camera2D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Effects/light.png" type="Texture" id=4]
+[ext_resource path="res://Effects/Campfire.png" type="Texture" id=5]
+[ext_resource path="res://UI/PlainHovered.png" type="Texture" id=6]
+[ext_resource path="res://UI/PlainUnhovered.png" type="Texture" id=7]
+[ext_resource path="res://UI/RogueUnhovered.png" type="Texture" id=8]
+[ext_resource path="res://UI/RogueHovered.png" type="Texture" id=9]
+[ext_resource path="res://World/Tree.png" type="Texture" id=10]
+[ext_resource path="res://World/DirtCliffTileMap.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Music and Sounds/campfirewav.wav" type="AudioStream" id=12]
+[ext_resource path="res://UI/PrinceUnhovered.png" type="Texture" id=13]
+[ext_resource path="res://UI/PrinceHovered.png" type="Texture" id=14]
+[ext_resource path="res://UI/PaladinHovered.png" type="Texture" id=15]
+[ext_resource path="res://UI/PaladinUnhovered.png" type="Texture" id=16]
+[ext_resource path="res://Effects/CampFireParticles.tscn" type="PackedScene" id=17]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.27451, 0.670588, 0.4, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.27451, 0.670588, 0.4, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="BitMap" id=5]
+data = {
+"data": PoolByteArray(  ),
+"size": Vector2( 0, 0 )
+}
+
+[sub_resource type="BitMap" id=6]
+data = {
+"data": PoolByteArray(  ),
+"size": Vector2( 0, 0 )
+}
+
+[sub_resource type="CanvasItemMaterial" id=7]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 7
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=8]
+emission_shape = 1
+emission_sphere_radius = 6.0
+flag_disable_z = true
+gravity = Vector3( 0, -100, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 180.0
+angle_random = 1.0
+scale = 0.4
+color = Color( 0.662745, 0.356863, 0.0509804, 1 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 5 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 5 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 5 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 5 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 5 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=15]
+animations = [ {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[node name="Menu" type="Control"]
+margin_right = 320.0
+margin_bottom = 180.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 160, 96 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 320, 192 )
+
+[node name="DirtCliffTileMap" parent="." instance=ExtResource( 11 )]
+tile_data = PoolIntArray( -65536, 0, 0, -65535, 0, 1, -65534, 0, 1, -65533, 0, 2, 0, 0, 65536, 1, 0, 65541, 2, 0, 131073, 3, 0, 131074, 65536, 0, 65540, 65537, 0, 131074, 131072, 0, 131075 )
+
+[node name="Trees" type="YSort" parent="."]
+
+[node name="Tree" type="Sprite" parent="Trees"]
+position = Vector2( 232, 64 )
+texture = ExtResource( 10 )
+
+[node name="Tree3" type="Sprite" parent="Trees"]
+position = Vector2( 272, 88 )
+texture = ExtResource( 10 )
+
+[node name="Tree4" type="Sprite" parent="Trees"]
+position = Vector2( 312, 88 )
+texture = ExtResource( 10 )
+
+[node name="Tree8" type="Sprite" parent="Trees"]
+position = Vector2( 168, 32 )
+texture = ExtResource( 10 )
+
+[node name="Tree13" type="Sprite" parent="Trees"]
+position = Vector2( 144, 0 )
+texture = ExtResource( 10 )
+
+[node name="Tree14" type="Sprite" parent="Trees"]
+position = Vector2( 120, 24 )
+texture = ExtResource( 10 )
+
+[node name="Tree5" type="Sprite" parent="Trees"]
+position = Vector2( 216, 32 )
+texture = ExtResource( 10 )
+
+[node name="Tree6" type="Sprite" parent="Trees"]
+position = Vector2( 264, 48 )
+texture = ExtResource( 10 )
+
+[node name="Tree15" type="Sprite" parent="Trees"]
+position = Vector2( 248, 32 )
+texture = ExtResource( 10 )
+
+[node name="Tree16" type="Sprite" parent="Trees"]
+position = Vector2( 296, 0 )
+texture = ExtResource( 10 )
+
+[node name="Tree17" type="Sprite" parent="Trees"]
+position = Vector2( 256, -8 )
+texture = ExtResource( 10 )
+
+[node name="Tree18" type="Sprite" parent="Trees"]
+position = Vector2( 208, -8 )
+texture = ExtResource( 10 )
+
+[node name="Tree7" type="Sprite" parent="Trees"]
+position = Vector2( 320, 16 )
+texture = ExtResource( 10 )
+
+[node name="Tree9" type="Sprite" parent="Trees"]
+position = Vector2( 272, 8 )
+texture = ExtResource( 10 )
+
+[node name="Tree10" type="Sprite" parent="Trees"]
+position = Vector2( 232, 8 )
+texture = ExtResource( 10 )
+
+[node name="Tree12" type="Sprite" parent="Trees"]
+position = Vector2( 192, 8 )
+texture = ExtResource( 10 )
+
+[node name="Tree11" type="Sprite" parent="Trees"]
+position = Vector2( 296, 40 )
+texture = ExtResource( 10 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 132.0
+margin_top = -36.0
+margin_right = 187.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+margin_right = 55.0
+margin_bottom = 14.0
+focus_mode = 1
+custom_styles/hover = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
+enabled_focus_mode = 1
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 55.0
+margin_bottom = 32.0
+focus_neighbour_bottom = NodePath("../StartButton")
+focus_mode = 1
+custom_styles/hover = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 1
+text = "Quit"
+
+[node name="PlainButton" type="TextureButton" parent="."]
+margin_left = 112.0
+margin_top = 64.0
+margin_right = 176.0
+margin_bottom = 128.0
+focus_neighbour_left = NodePath("../PrinceButton")
+focus_neighbour_right = NodePath("../PaladinButton")
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+texture_click_mask = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PlainButton"]
+visible = false
+margin_left = -32.0
+margin_top = 9.0
+margin_right = 39.0
+margin_bottom = 23.0
+text = "Commoner"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PaladinButton" type="TextureButton" parent="."]
+margin_left = 144.0
+margin_top = 64.0
+margin_right = 208.0
+margin_bottom = 128.0
+focus_neighbour_left = NodePath("../PlainButton")
+focus_neighbour_right = NodePath("../RogueButton")
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 15 )
+texture_hover = ExtResource( 15 )
+texture_focused = ExtResource( 15 )
+texture_click_mask = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PaladinButton"]
+margin_left = 37.0
+margin_top = 10.0
+margin_right = 83.0
+margin_bottom = 24.0
+text = "Paladin"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RogueButton" type="TextureButton" parent="."]
+margin_left = 160.0
+margin_top = 88.0
+margin_right = 224.0
+margin_bottom = 152.0
+focus_neighbour_left = NodePath("../PaladinButton")
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 9 )
+texture_focused = ExtResource( 9 )
+texture_click_mask = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="RogueButton"]
+visible = false
+margin_left = 40.0
+margin_top = 10.0
+margin_right = 96.0
+margin_bottom = 24.0
+text = "Assassin"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PrinceButton" type="TextureButton" parent="."]
+margin_left = 96.0
+margin_top = 88.0
+margin_right = 160.0
+margin_bottom = 152.0
+focus_neighbour_right = NodePath("../PlainButton")
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 14 )
+texture_hover = ExtResource( 14 )
+texture_focused = ExtResource( 14 )
+texture_click_mask = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PrinceButton"]
+visible = false
+margin_left = -10.0
+margin_top = 9.0
+margin_right = 30.0
+margin_bottom = 23.0
+text = "Prince"
+
+[node name="Camera2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 160, 88 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.341176, 0.341176, 0.341176, 1 )
+
+[node name="CampfireNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+autoplay = true
+bus = "Music"
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 160, 128 )
+texture = ExtResource( 4 )
+texture_scale = 0.22
+color = Color( 0.780392, 0.517647, 0.0156863, 1 )
+shadow_enabled = true
+
+[node name="CampFireParticles" parent="Light2D" instance=ExtResource( 17 )]
+material = SubResource( 7 )
+explosiveness = 0.1
+process_material = SubResource( 8 )
+
+[node name="Campfire" type="AnimatedSprite" parent="Light2D"]
+position = Vector2( 0, -8 )
+frames = SubResource( 15 )
+frame = 4
+playing = true
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="focus_entered" from="PlainButton" to="." method="_on_PlainButton_focus_entered"]
+[connection signal="focus_exited" from="PlainButton" to="." method="_on_PlainButton_focus_exited"]
+[connection signal="pressed" from="PlainButton" to="." method="_on_PlainButton_pressed"]
+[connection signal="focus_entered" from="PaladinButton" to="." method="_on_PaladinButton_focus_entered"]
+[connection signal="focus_exited" from="PaladinButton" to="." method="_on_PaladinButton_focus_exited"]
+[connection signal="pressed" from="PaladinButton" to="." method="_on_PaladinButton_pressed"]
+[connection signal="focus_entered" from="RogueButton" to="." method="_on_RogueButton_focus_entered"]
+[connection signal="focus_exited" from="RogueButton" to="." method="_on_RogueButton_focus_exited"]
+[connection signal="pressed" from="RogueButton" to="." method="_on_RogueButton_pressed"]
+[connection signal="focus_entered" from="PrinceButton" to="." method="_on_PrinceButton_focus_entered"]
+[connection signal="focus_exited" from="PrinceButton" to="." method="_on_PrinceButton_focus_exited"]
+[connection signal="pressed" from="PrinceButton" to="." method="_on_PrinceButton_pressed"]

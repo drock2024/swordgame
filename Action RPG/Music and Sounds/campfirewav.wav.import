@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/campfirewav.wav-90de70c9f509effba668a229046f03df.sample"
+
+[deps]
+
+source_file="res://Music and Sounds/campfirewav.wav"
+dest_files=[ "res://.import/campfirewav.wav-90de70c9f509effba668a229046f03df.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,83 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://World/GrassBackground.png" type="Texture" id=1]
+[ext_resource path="res://World/DirtPathTileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Camera2D.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/DirtCliffTileMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overlap/DoorPoint.tscn" type="PackedScene" id=7]
+[ext_resource path="res://UI/ObjectiveUI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://UI/DaggerUI.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Enemies/BatBoss/Pedestal.tscn" type="PackedScene" id=11]
+
+[node name="ForestBoss" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 160.572, 90.4287 )
+scale = Vector2( 1.59416, 1.63874 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 352, 208 )
+
+[node name="DirtPathTileMap" parent="." instance=ExtResource( 2 )]
+tile_data = PoolIntArray( 131075, 0, 0, 131076, 0, 1, 131077, 0, 1, 131078, 0, 1, 131079, 0, 1, 131080, 0, 1, 131081, 0, 1, 131082, 0, 1, 131083, 0, 1, 131084, 0, 1, 131085, 0, 1, 131086, 0, 1, 131087, 0, 1, 131088, 0, 2, 196610, 0, 0, 196611, 0, 65545, 196612, 0, 131073, 196613, 0, 131073, 196614, 0, 131073, 196615, 0, 131073, 196616, 0, 131073, 196617, 0, 131073, 196618, 0, 131073, 196619, 0, 131073, 196620, 0, 131073, 196621, 0, 131073, 196622, 0, 131073, 196623, 0, 131073, 196624, 0, 9, 196625, 0, 2, 327679, 0, 0, 262144, 0, 1, 262145, 0, 1, 262146, 0, 131078, 262147, 0, 65538, 262160, 0, 65536, 262161, 0, 131077, 262162, 0, 1, 262163, 0, 1, 262164, 0, 1, 262165, 0, 2, 393215, 0, 131072, 327680, 0, 131073, 327681, 0, 131073, 327682, 0, 65542, 327683, 0, 65538, 327696, 0, 65536, 327697, 0, 65541, 327698, 0, 131073, 327699, 0, 131073, 327700, 0, 131073, 327701, 0, 131074, 393218, 0, 131072, 393219, 0, 9, 393220, 0, 1, 393221, 0, 1, 393222, 0, 1, 393223, 0, 1, 393224, 0, 1, 393225, 0, 1, 393226, 0, 1, 393227, 0, 1, 393228, 0, 1, 393229, 0, 1, 393230, 0, 1, 393231, 0, 1, 393232, 0, 65545, 393233, 0, 131074, 458755, 0, 131072, 458756, 0, 131073, 458757, 0, 131073, 458758, 0, 131073, 458759, 0, 131073, 458760, 0, 131073, 458761, 0, 131073, 458762, 0, 131073, 458763, 0, 131073, 458764, 0, 131073, 458765, 0, 131073, 458766, 0, 131073, 458767, 0, 131073, 458768, 0, 131074 )
+
+[node name="DirtCliffTileMap" parent="." instance=ExtResource( 6 )]
+tile_data = PoolIntArray( -131071, 0, 0, -131070, 0, 1, -131069, 0, 5, -131068, 0, 196609, -131067, 0, 196609, -131066, 0, 6, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 1, -131061, 0, 2, -65536, 0, 4, -65535, 0, 196614, -65534, 0, 131073, -65533, 0, 131074, -65530, 0, 131072, -65529, 0, 131073, -65528, 0, 131073, -65527, 0, 131073, -65526, 0, 65542, -65525, 0, 65538, 65534, 0, 0, 65535, 0, 5, 0, 0, 196615, 10, 0, 131072, 11, 0, 65543, 131069, 0, 4, 131070, 0, 196614, 131071, 0, 131074, 65547, 0, 131075, 196605, 0, 65539, 262141, 0, 196612, 262142, 0, 6, 262143, 0, 2, 196619, 0, 3, 327678, 0, 131072, 327679, 0, 65543, 262153, 0, 0, 262154, 0, 5, 262155, 0, 196615, 393215, 0, 196612, 327680, 0, 196609, 327681, 0, 196609, 327682, 0, 6, 327683, 0, 2, 327686, 0, 0, 327687, 0, 5, 327688, 0, 196609, 327689, 0, 196614, 327690, 0, 131074, 393218, 0, 131072, 393219, 0, 65543, 393222, 0, 65540, 393223, 0, 131074, 458755, 0, 196612, 458756, 0, 196609, 458757, 0, 196609, 458758, 0, 196615 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 12, 80 )
+
+[node name="TopLeft" parent="Camera2D/Limits" index="0"]
+position = Vector2( -16, -32 )
+
+[node name="BottomRight" parent="Camera2D/Limits" index="1"]
+position = Vector2( 336, 192 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 12, 80 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
+remote_path = NodePath("../../../Camera2D")
+
+[node name="Pedestal" parent="YSort" instance=ExtResource( 11 )]
+position = Vector2( 157, 74 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 4 )]
+margin_left = 4.0
+margin_top = 3.0
+margin_right = 85.0
+margin_bottom = 15.0
+
+[node name="OrbUI" parent="CanvasLayer" instance=ExtResource( 9 )]
+margin_left = 3.0
+margin_top = 15.0
+margin_right = 84.0
+margin_bottom = 27.0
+
+[node name="DaggerUI" parent="CanvasLayer" instance=ExtResource( 10 )]
+margin_left = 271.0
+margin_top = 3.0
+margin_right = 352.0
+margin_bottom = 19.0
+
+[node name="DoorPoint" parent="." instance=ExtResource( 7 )]
+position = Vector2( -32, 80 )
+
+[node name="DoorPoint2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 352, 80 )
+
+[node name="DoorPoint3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 160, 208 )
+rotation = 1.5708
+
+[node name="DoorPoint4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 160, -16 )
+rotation = 1.5708
+
+[editable path="Camera2D"]

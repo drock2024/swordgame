@@ -1,0 +1,117 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://World/GrassBackground.png" type="Texture" id=1]
+[ext_resource path="res://UI/SettingsMenu.gd" type="Script" id=2]
+[ext_resource path="res://UI/SliderOver.png" type="Texture" id=3]
+[ext_resource path="res://UI/SliderProgress.png" type="Texture" id=4]
+[ext_resource path="res://UI/SliderUnder.png" type="Texture" id=5]
+[ext_resource path="res://UI/ToggleOn.png" type="Texture" id=6]
+[ext_resource path="res://UI/ToggleOff.png" type="Texture" id=7]
+[ext_resource path="res://Camera2D.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Effects/light.png" type="Texture" id=9]
+[ext_resource path="res://Music and Sounds/campfirewav.wav" type="AudioStream" id=10]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.286275, 0.764706, 0.282353, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxFlat" id=3]
+
+[node name="SettingsMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 160, 96 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 320, 192 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -27.5
+margin_right = 116.0
+margin_bottom = 27.5
+custom_constants/separation = 32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MasterVolume" type="Label" parent="VBoxContainer"]
+margin_right = 116.0
+margin_bottom = 14.0
+text = "Master Volume:"
+
+[node name="Fullscreen" type="Label" parent="VBoxContainer"]
+margin_top = 46.0
+margin_right = 116.0
+margin_bottom = 60.0
+text = "Enable Fullscreen:"
+
+[node name="MainMenu" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -116.0
+margin_bottom = 20.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+text = "Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VolumeSlider" type="TextureProgress" parent="."]
+anchor_left = 0.4
+anchor_top = 0.356
+anchor_right = 0.4
+anchor_bottom = 0.356
+margin_top = -0.0800018
+margin_right = 128.0
+margin_bottom = 31.92
+min_value = -50.0
+max_value = 0.0
+value = -25.0
+texture_under = ExtResource( 5 )
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnableFullscreen" type="CheckButton" parent="."]
+margin_left = 136.0
+margin_top = 96.0
+margin_right = 212.0
+margin_bottom = 136.0
+custom_icons/off = ExtResource( 7 )
+custom_icons/on = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Camera2D" parent="." instance=ExtResource( 8 )]
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 320, 0 )
+texture = ExtResource( 9 )
+texture_scale = 0.4
+color = Color( 0.694118, 0.403922, 0.0627451, 1 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.396078, 0.396078, 0.396078, 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+autoplay = true
+bus = "Music"
+[connection signal="pressed" from="MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="mouse_entered" from="VolumeSlider" to="." method="_on_VolumeSlider_mouse_entered"]
+[connection signal="mouse_exited" from="VolumeSlider" to="." method="_on_VolumeSlider_mouse_exited"]
+[connection signal="toggled" from="EnableFullscreen" to="." method="_on_EnableFullscreen_toggled"]

@@ -1,0 +1,10 @@
+Godot Engine v3.2.3.stable.mono.official - https://godotengine.org
+OpenGL ES 3.0 Renderer: GeForce RTX 2060/PCIe/SSE2
+ 
+Mono: Log file is: 'C:\Users\Derrick\AppData\Roaming/Godot/mono/mono_logs/2022_02_06 17.59.34 (12224).txt'
+**ERROR**: Can't emit non-existing signal "max_health_changed".
+   At: core/object.cpp:1195:emit_signal() - Condition "!signal_is_valid && !script.is_null() && !Ref<Script>(script)->has_script_signal(p_name)" is true. Returned: ERR_UNAVAILABLE
+**ERROR**: Can't use get_node() with absolute paths from outside the active scene tree.
+   At: scene/main/node.cpp:1320:get_node_or_null() - Condition "!data.inside_tree && p_path.is_absolute()" is true. Returned: __null
+**ERROR**: Can't use get_node() with absolute paths from outside the active scene tree.
+   At: scene/main/node.cpp:1320:get_node_or_null() - Condition "!data.inside_tree && p_path.is_absolute()" is true. Returned: __null

@@ -1,0 +1,140 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://World/GrassBackground.png" type="Texture" id=1]
+[ext_resource path="res://World/DirtPathTileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Camera2D.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/DirtCliffTileMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overlap/DoorPoint.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/Bush.tscn" type="PackedScene" id=8]
+[ext_resource path="res://World/Grass.tscn" type="PackedScene" id=9]
+[ext_resource path="res://World/Tree.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Enemies/BushMimic.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Enemies/Acorn/TriggerAcorn.tscn" type="PackedScene" id=12]
+[ext_resource path="res://UI/ObjectiveUI.tscn" type="PackedScene" id=13]
+[ext_resource path="res://UI/DaggerUI.tscn" type="PackedScene" id=14]
+
+[node name="TestRoom2" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 160, 90 )
+scale = Vector2( 1.64286, 1.64286 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 208, 112 )
+
+[node name="DirtPathTileMap" parent="." instance=ExtResource( 2 )]
+tile_data = PoolIntArray( -65527, 0, 0, -65526, 0, 2, 9, 0, 65536, 10, 0, 65538, 65545, 0, 65536, 65546, 0, 65538, 65554, 0, 196611, 131081, 0, 65536, 131082, 0, 131077, 131083, 0, 1, 131084, 0, 5, 131085, 0, 196610, 196617, 0, 131072, 196618, 0, 131073, 196619, 0, 65544, 196620, 0, 131074, 196622, 0, 196611, 327679, 0, 0, 262144, 0, 2, 262146, 0, 3, 262149, 0, 3, 262155, 0, 131075, 262157, 0, 196611, 393214, 0, 196608, 393215, 0, 196614, 327680, 0, 131074, 327682, 0, 196612, 327683, 0, 196610, 327685, 0, 196612, 327686, 0, 196610, 327688, 0, 196608, 327689, 0, 196610, 327694, 0, 196611, 393226, 0, 3, 393231, 0, 196608, 393232, 0, 196610, 458761, 0, 0, 458762, 0, 131079, 524297, 0, 65536, 524298, 0, 65538, 589833, 0, 65536, 589834, 0, 65538, 655369, 0, 65536, 655370, 0, 65538, 720905, 0, 131072, 720906, 0, 131074 )
+
+[node name="DirtCliffTileMap" parent="." instance=ExtResource( 6 )]
+tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 5, -65535, 0, 196609, -65534, 0, 196609, -65533, 0, 196610, -65530, 0, 196608, -65529, 0, 196609, -65528, 0, 196609, -65527, 0, 6, -65526, 0, 2, 65535, 0, 65540, 0, 0, 131074, 9, 0, 131072, 10, 0, 65543, 131071, 0, 131075, 65546, 0, 65539, 131082, 0, 131075, 262143, 0, 0, 196608, 0, 1, 196609, 0, 2, 327679, 0, 65536, 262144, 0, 65537, 262145, 0, 131077, 262146, 0, 2, 262154, 0, 3, 393215, 0, 131072, 327680, 0, 131073, 327681, 0, 131073, 327682, 0, 196613, 327683, 0, 196610, 327686, 0, 196608, 327687, 0, 196609, 327688, 0, 196609, 327689, 0, 196609, 327690, 0, 196615 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 14, 80 )
+
+[node name="TopLeft" parent="Camera2D/Limits" index="0"]
+position = Vector2( -11, -2 )
+
+[node name="BottomRight" parent="Camera2D/Limits" index="1"]
+position = Vector2( 331, 182 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 14, 80 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
+remote_path = NodePath("../../../Camera2D")
+
+[node name="Grass" type="YSort" parent="YSort"]
+
+[node name="Grass" parent="YSort/Grass" instance=ExtResource( 9 )]
+position = Vector2( 192, 64 )
+
+[node name="Grass2" parent="YSort/Grass" instance=ExtResource( 9 )]
+position = Vector2( 208, 48 )
+
+[node name="Grass4" parent="YSort/Grass" instance=ExtResource( 9 )]
+position = Vector2( 208, 80 )
+
+[node name="Grass5" parent="YSort/Grass" instance=ExtResource( 9 )]
+position = Vector2( 224, 96 )
+
+[node name="Grass6" parent="YSort/Grass" instance=ExtResource( 9 )]
+position = Vector2( 240, 80 )
+
+[node name="Grass8" parent="YSort/Grass" instance=ExtResource( 9 )]
+position = Vector2( 240, 48 )
+
+[node name="Grass9" parent="YSort/Grass" instance=ExtResource( 9 )]
+position = Vector2( 224, 32 )
+
+[node name="Grass10" parent="YSort/Grass" instance=ExtResource( 9 )]
+position = Vector2( 240, 32 )
+
+[node name="Bush" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 49, 15 )
+
+[node name="Bush4" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 304, 92 )
+
+[node name="Bush2" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 62, 40 )
+
+[node name="Bush3" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 78, 20 )
+
+[node name="Tree" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 14, 128 )
+
+[node name="Tree2" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 32, 160 )
+
+[node name="Tree3" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 0, 168 )
+
+[node name="Tree4" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 62, 168 )
+
+[node name="BushMimic" parent="YSort" instance=ExtResource( 11 )]
+position = Vector2( 287, 77 )
+
+[node name="Acorn" parent="YSort" instance=ExtResource( 12 )]
+position = Vector2( 160, 75 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 4 )]
+margin_left = 4.0
+margin_top = 3.0
+margin_right = 85.0
+margin_bottom = 15.0
+
+[node name="OrbUI" parent="CanvasLayer" instance=ExtResource( 13 )]
+margin_left = 3.0
+margin_top = 15.0
+margin_right = 84.0
+margin_bottom = 27.0
+
+[node name="DaggerUI" parent="CanvasLayer" instance=ExtResource( 14 )]
+margin_left = 271.0
+margin_top = 3.0
+margin_right = 352.0
+margin_bottom = 19.0
+
+[node name="DoorPoint" parent="." instance=ExtResource( 7 )]
+position = Vector2( -32, 80 )
+
+[node name="DoorPoint2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 353, 112 )
+
+[node name="DoorPoint3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 160, 200 )
+rotation = 1.5708
+
+[node name="DoorPoint4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 160, -24 )
+rotation = 1.5708
+
+[editable path="Camera2D"]

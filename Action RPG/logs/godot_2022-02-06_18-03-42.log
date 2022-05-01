@@ -1,0 +1,18 @@
+Godot Engine v3.2.3.stable.mono.official - https://godotengine.org
+OpenGL ES 3.0 Renderer: GeForce RTX 2060/PCIe/SSE2
+ 
+Mono: Log file is: 'C:\Users\Derrick\AppData\Roaming/Godot/mono/mono_logs/2022_02_06 18.00.08 (12332).txt'
+**ERROR**: Can't emit non-existing signal "max_health_changed".
+   At: core/object.cpp:1195:emit_signal() - Condition "!signal_is_valid && !script.is_null() && !Ref<Script>(script)->has_script_signal(p_name)" is true. Returned: ERR_UNAVAILABLE
+**ERROR**: Can't emit non-existing signal "max_health_changed".
+   At: core/object.cpp:1195:emit_signal() - Condition "!signal_is_valid && !script.is_null() && !Ref<Script>(script)->has_script_signal(p_name)" is true. Returned: ERR_UNAVAILABLE
+**ERROR**: Can't emit non-existing signal "max_health_changed".
+   At: core/object.cpp:1195:emit_signal() - Condition "!signal_is_valid && !script.is_null() && !Ref<Script>(script)->has_script_signal(p_name)" is true. Returned: ERR_UNAVAILABLE
+**ERROR**: Can't emit non-existing signal "max_health_changed".
+   At: core/object.cpp:1195:emit_signal() - Condition "!signal_is_valid && !script.is_null() && !Ref<Script>(script)->has_script_signal(p_name)" is true. Returned: ERR_UNAVAILABLE
+**ERROR**: Can't emit non-existing signal "max_health_changed".
+   At: core/object.cpp:1195:emit_signal() - Condition "!signal_is_valid && !script.is_null() && !Ref<Script>(script)->has_script_signal(p_name)" is true. Returned: ERR_UNAVAILABLE
+**ERROR**: Node not found: Label.
+   At: scene/main/node.cpp:1381:get_node() - Condition "!node" is true. Returned: __null
+**ERROR**: In Object of type 'Node': Attempt to connect nonexistent signal 'max_health_changed' to method 'Control.set_max_hearts'.
+   At: core/object.cpp:1503:connect() - Condition "!signal_is_valid" is true. Returned: ERR_INVALID_PARAMETER
