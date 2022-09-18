@@ -218,20 +218,17 @@ func _on_Hurtbox_invincibility_ended():
 func _on_DurationTimer_timeout():
 	if CLASS == "ROGUE":
 		$Sprite.modulate.a = 1;
-		abilityTimer.stop();
-		cooldownTimer.start(10);
+		end_ability(10);
 		set_collision_layer_bit(1, true);
 	elif CLASS == "PRINCE":
 		$Sprite.texture = load("res://Player/SpriteSheets/Prince.png");
-		abilityTimer.stop();
-		cooldownTimer.start(15);
+		end_ability(15);
 		hitBoxShape.set_scale(Vector2(1, 1));
 		hitBoxShape.rotation_degrees = 0;
 		swordHitbox.position = og_pos;
 	elif CLASS == "PALADIN":
 		$Particles2D.emitting = false;
-		abilityTimer.stop();
-		cooldownTimer.start(12);
+		end_ability(12);
 		#hurtBox.invincible = false;
 		defenseLight = false;
 		$GlowSound.playing = false;
@@ -239,7 +236,7 @@ func _on_DurationTimer_timeout():
 func _on_CooldownTimer_timeout():
 	cooldownTimer.stop();
 	cooldown = true;
-
+	$AbilityUI.blink();
 
 func _on_FlashTimer_timeout():
 	$FlashTimer.stop();
@@ -260,3 +257,8 @@ func use_health_dagger():
 func _on_HealTimer_timeout():
 	healable = true;
 	$HealTimer.stop();
+
+func end_ability(time):
+	abilityTimer.stop();
+	cooldownTimer.start(time);
+	$AbilityUI.show();

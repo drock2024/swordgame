@@ -13,6 +13,7 @@ var time_of_day = "night";
 var mimic_defeated = false setget set_mimic;
 var money = 0;
 var bat_summoned = false;
+var bat_defeated = false;
 
 signal no_health
 signal health_changed(value)

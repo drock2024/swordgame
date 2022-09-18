@@ -158,6 +158,8 @@ func _physics_process(delta):
 						$LungeTimer.start(1);
 
 func _on_Stats_no_health():
+	PlayerStats.bat_summoned = false;
+	PlayerStats.bat_defeated = true;
 	queue_free();
 	var enemyDeathEffect = EnemyDeathEffect.instance();
 	PlayerStats.set_obj(PlayerStats.obj + 1)

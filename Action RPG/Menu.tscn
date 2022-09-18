@@ -336,7 +336,7 @@ process_material = SubResource( 8 )
 [node name="Campfire" type="AnimatedSprite" parent="Light2D"]
 position = Vector2( 0, -8 )
 frames = SubResource( 15 )
-frame = 4
+frame = 3
 playing = true
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]

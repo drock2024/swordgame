@@ -6,6 +6,8 @@ const BatBoss = preload("res://Enemies/BatBoss/BatBoss.tscn");
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if PlayerStats.bat_defeated == true:
+		queue_free();
 	$Label.hide();
 	var font = DynamicFont.new();
 	font.font_data = load ("res://UI/alagard.ttf");
