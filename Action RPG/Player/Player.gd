@@ -17,7 +17,8 @@ signal room_down;
 enum {
 	MOVE,
 	ROLL,
-	ATTACK
+	ATTACK,
+	DISABLE
 }
 
 var state = MOVE;
@@ -27,8 +28,8 @@ var stats = PlayerStats;
 var bruh = true;
 var room_array = ["res://World/TestRoom.tscn", "res://World/TestRoom2.tscn"]
 var vert_array = ["res://World/Levels/FOrest/ForestRoom1.tscn", "res://World/TestRoomUp.tscn"]
-var section_array_1 = ["res://World/TestRoomDown.tscn",  "res://World/Levels/FOrest/ForestBoss.tscn"]
-var section_array_2 = ["res://World/Levels/FOrest/ForestRoom1.tscn", "res://World/TestRoomUp.tscn"]
+var section_array_1 = ["res://World/TestRoomDown.tscn", "res://World/Levels/FOrest/ForestRoom2.tscn"]
+var section_array_2 = ["res://World/Levels/FOrest/ForestExit.tscn", "res://World/Levels/FOrest/ForestBoss.tscn"]
 var room_map = [];
 var current_room = "res://World.tscn";
 var cooldown = true;
@@ -37,7 +38,10 @@ var prince_length = 6;
 var og_pos = Vector2.ZERO;
 var defenseLight = false;
 var healable = true;
-
+var knockback = Vector2.ZERO;
+var wolfUnlocked = false;
+var sound_flag = true;
+var ui_pause = false;
 
 onready var animationPlayer = $AnimationPlayer;
 onready var animationTree = $AnimationTree;
@@ -53,7 +57,7 @@ onready var hurtBoxCollision = $HitboxPivot/SwordHitbox/CollisionShape2D;
 
 func _ready():
 	randomize();
-	stats.connect("no_health", self, "queue_free");
+	stats.connect("no_health", self, "game_over");
 	stats.connect("health_increase", self, "heal_effect");
 	animationTree.active = true;
 	swordHitbox.knockback_vector = roll_vector;
@@ -62,18 +66,34 @@ func _ready():
 	$GlowSound.playing = false;
 	#room_array.shuffle();
 	#vert_array.shuffle();
+	#ensure hit stun reset
+	blinkAnimationPlayer.play("Stop");
 	room_map = create_2d_array(room_array, vert_array);
+	#Class if statements for Sprite			
 	if CLASS == "BASE":
 		$Sprite.texture = load("res://Player/Player.png");
+		PlayerStats.player_speed = 1
 	elif CLASS == "ROGUE":
 		$Sprite.texture = load("res://Player/Rogue.png");
+		PlayerStats.player_speed = 1.2
 	elif CLASS == "PRINCE":
 		$Sprite.texture = load("res://Player/SpriteSheets/Prince.png");
+		PlayerStats.player_speed = 1.1
 	elif CLASS == "PALADIN":
 		$Sprite.texture = load("res://Player/SpriteSheets/Paladin.png");
-
+		PlayerStats.player_speed = 0.95
+	elif CLASS == "WOLF":
+		$Sprite.texture = load("res://Player/SpriteSheets/WolfPlayer.png");
+		PlayerStats.player_speed = 1.22
+	
 func _physics_process(delta):
+	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta);
+	knockback = move_and_slide(knockback);
+	
 	match state:
+		DISABLE:
+			visible = false;
+			animationPlayer.set_process(false);
 		MOVE:
 			move_state(delta);
 		ROLL:
@@ -86,9 +106,11 @@ func _physics_process(delta):
 	else:
 		$Light2D.set_texture_scale(0.12)
 	#Check input for ability activation
-	if Input.is_action_just_pressed("ability") and cooldown == true:
+	if Input.is_action_just_pressed("ability") and cooldown == true and CLASS != "BASE":
 		activate_ability();
 		cooldown = false;
+	
+	$AbilityBar.value = abilityTimer.time_left
 
 func create_2d_array(array_1, array_2):
 	var a = [array_1, array_2]
@@ -99,8 +121,8 @@ func set_spawn(location: Vector2, direction: Vector2):
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO;
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left");
-	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up");
+	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left");
+	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up");
 	input_vector = input_vector.normalized();
 	
 	if input_vector != Vector2.ZERO:
@@ -111,14 +133,7 @@ func move_state(delta):
 		animationTree.set("parameters/Attack/blend_position", input_vector);
 		animationTree.set("parameters/Roll/blend_position", input_vector);
 		animationState.travel("Run");
-		if CLASS == "ROGUE":
-			velocity = velocity.move_toward(input_vector * MAX_SPEED * 1.2, ACCELERATION * delta);
-		elif CLASS == "PRINCE":
-			velocity = velocity.move_toward(input_vector * MAX_SPEED * 1.1, ACCELERATION * delta);
-		elif CLASS == "PALADIN":
-			velocity = velocity.move_toward(input_vector * MAX_SPEED * 0.9, ACCELERATION * delta);
-		else:
-			velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta);
+		velocity = velocity.move_toward(input_vector * MAX_SPEED * PlayerStats.player_speed, ACCELERATION * delta);
 	else:
 		animationState.travel("Idle");
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta);
@@ -173,13 +188,16 @@ func attack_animation_finished():
 	state = MOVE;
 
 func activate_ability():
+	$AbilityBar.show()
 	if CLASS == "ROGUE":
 		$Sprite.modulate.a = 0.5;
 		abilityTimer.start(invis_length);
+		$AbilityBar.max_value = invis_length
 		set_collision_layer_bit(1, false);
 	if CLASS == "PRINCE":
 		$Sprite.texture = load("res://Player/SpriteSheets/PrinceAbility.png");
 		abilityTimer.start(prince_length);
+		$AbilityBar.max_value = prince_length
 		hitBoxShape.set_scale(Vector2(1, 2.8));
 		hitBoxShape.rotation_degrees = 90;
 		og_pos = swordHitbox.position;
@@ -193,20 +211,30 @@ func activate_ability():
 	if CLASS == "PALADIN":
 		$Particles2D.emitting = true;
 		abilityTimer.start(invis_length);
+		$AbilityBar.max_value = invis_length
 		#hurtBox.invincible = true;
 		#hurtBox.set_process(false);
 		defenseLight = true;
-		$GlowSound.playing = true;
+		if sound_flag:
+			$GlowSound.playing = true;
 		
 	
 
 func _on_Hurtbox_area_entered(area):
-	if defenseLight == false:
+	var enemy_hit = area
+	if defenseLight == false && state != ROLL:
 		stats.health -= area.damage;
+		print(stats.health)
 		hurtBox.start_invincibility(0.6);
 		hurtBox.create_hit_effect();
 		var playerHurtSound = PlayerHurtSound.instance()
 		get_tree().current_scene.add_child(playerHurtSound)
+		#apply knockback
+		knockback = area.k_vector * 150;
+		if enemy_hit.get_parent().name == "Spitter":
+			print("Spitter hit me")
+			PlayerStats.player_speed = 0.7
+			$StatusTimer.start(4)
 
 
 func _on_Hurtbox_invincibility_started():
@@ -248,7 +276,7 @@ func heal_effect():
 	heal.global_position = global_position - Vector2(0,16);
 
 func use_health_dagger():
-	if stats.daggers > 0 and stats.health < stats.max_health:
+	if stats.daggers > 0 and stats.health < stats.max_health and stats.health > 0:
 		print("Bruh")
 		stats.daggers -= 1;
 		stats.health += 1;
@@ -262,3 +290,21 @@ func end_ability(time):
 	abilityTimer.stop();
 	cooldownTimer.start(time);
 	$AbilityUI.show();
+	$AbilityBar.hide();
+
+func game_over():
+	hide()
+
+func _on_StatusTimer_timeout():
+		if CLASS == "ROGUE":
+			PlayerStats.player_speed = 1.2
+		elif CLASS == "PRINCE":
+			PlayerStats.player_speed = 1.1
+		elif CLASS == "PALADIN":
+			PlayerStats.player_speed = 0.95
+		elif CLASS == "WOLF":
+			PlayerStats.player_speed = 1.22
+		else:
+			PlayerStats.player_speed = 1
+		print("Player Speed: ", PlayerStats.player_speed)
+		$StatusTimer.stop()

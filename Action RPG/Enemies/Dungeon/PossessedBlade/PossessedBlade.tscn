@@ -1,0 +1,164 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://Enemies/Dungeon/PossessedBlade/possessedSword.png" type="Texture" id=1]
+[ext_resource path="res://Shadows/MediumShadow.png" type="Texture" id=2]
+[ext_resource path="res://Overlap/Hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Overlap/Hurtbox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Enemies/Dungeon/PossessedBlade/PossessedBlade.gd" type="Script" id=6]
+[ext_resource path="res://Enemies/Dungeon/PossessedBlade/PossessedSwordDownLeft.png" type="Texture" id=7]
+[ext_resource path="res://Enemies/Dungeon/PossessedBlade/PossessedSwordLeft.png" type="Texture" id=8]
+[ext_resource path="res://Enemies/Dungeon/PossessedBlade/PossessedSwordUpLeft.png" type="Texture" id=9]
+[ext_resource path="res://Enemies/Dungeon/PossessedBlade/PossessedSwordDownRight.png" type="Texture" id=10]
+[ext_resource path="res://Enemies/Dungeon/PossessedBlade/PossessedSwordUp.png" type="Texture" id=11]
+[ext_resource path="res://Enemies/Dungeon/PossessedBlade/PossessedSwordUpRight.png" type="Texture" id=12]
+[ext_resource path="res://Enemies/Dungeon/PossessedBlade/PossessedSwordDown.png" type="Texture" id=13]
+[ext_resource path="res://Enemies/Dungeon/PossessedBlade/PossessedSwordRight.png" type="Texture" id=14]
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=15]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 160, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 192, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 224, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "right",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "upleft",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "downright",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "downleft",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "upright",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 8.0
+height = 16.0
+
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 7.99997
+height = 14.0001
+
+[sub_resource type="CapsuleShape2D" id=12]
+radius = 7.0
+height = 18.0
+
+[sub_resource type="CircleShape2D" id=13]
+radius = 63.0
+
+[node name="PossessedBlade" type="KinematicBody2D"]
+collision_layer = 16
+script = ExtResource( 6 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 9 )
+animation = "down"
+playing = true
+
+[node name="Sprite" type="Sprite" parent="AnimatedSprite"]
+visible = false
+position = Vector2( 0, 16 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 10 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 5 )]
+collision_layer = 8
+collision_mask = 1
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+rotation = 1.5708
+shape = SubResource( 11 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 3 )]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 12 )
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 4 )]
+collision_layer = 16
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+shape = SubResource( 13 )
+
+[node name="Rest" type="Timer" parent="."]
+
+[node name="Stats" parent="." instance=ExtResource( 15 )]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="body_entered" from="PlayerDetectionZone" to="." method="_on_PlayerDetectionZone_body_entered"]
+[connection signal="timeout" from="Rest" to="." method="_on_Rest_timeout"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+
+[editable path="Hurtbox"]
+
+[editable path="Hitbox"]
+
+[editable path="PlayerDetectionZone"]

@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Enemies/Dungeon/Spikes/floor_spikes_anim_f1.png" type="Texture" id=1]
+[ext_resource path="res://Enemies/Dungeon/Spikes/floor_spikes_anim_f2.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/Dungeon/Spikes/floor_spikes_anim_f3.png" type="Texture" id=3]
+[ext_resource path="res://Enemies/Dungeon/Spikes/floor_spikes_anim_f0.png" type="Texture" id=4]
+[ext_resource path="res://Enemies/Dungeon/Spikes/FloorSpikes.gd" type="Script" id=5]
+[ext_resource path="res://Overlap/Hitbox.tscn" type="PackedScene" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "active",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "activate",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "inactive",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
+
+[node name="FloorSpikes" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "inactive"
+playing = true
+
+[node name="Hitbox" parent="." instance=ExtResource( 6 )]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 2 )
+
+[node name="SpikesTimer" type="Timer" parent="."]
+[connection signal="timeout" from="SpikesTimer" to="." method="_on_SpikesTimer_timeout"]
+
+[editable path="Hitbox"]

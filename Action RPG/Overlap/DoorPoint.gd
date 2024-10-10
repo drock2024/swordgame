@@ -29,5 +29,5 @@ func enter_top_door():
 
 func enter_bottom_door():
 	if PlayerStats.bat_summoned == false:
-		spawn_location = Vector2(160, 24)
+		spawn_location = Vector2(160, 16)
 		get_node(NodePath("/root/SceneManager")).player_down_room(spawn_location, spawn_direction);

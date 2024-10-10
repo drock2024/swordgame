@@ -8,6 +8,11 @@ onready var tween = $Tween;
 
 var shake_amount = 0;
 var default_offset = offset;
+var menu_cam = true;
+var zooming = false
+var smooth_zoom = 1
+var target_zoom = 1
+var zoom_speed = 10
 
 func _ready():
 	limit_top = topLeft.position.y;
@@ -15,11 +20,15 @@ func _ready():
 	limit_bottom = bottomRight.position.y;
 	limit_right = bottomRight.position.x;
 	color.hide();
-	set_process(false);
+	if get_tree().current_scene.name != "res://Menu.tscn":
+		set_process(false);
+		menu_cam = false
 
 func _process(delta):
-	offset = Vector2(rand_range(-shake_amount, shake_amount), rand_range(shake_amount, -shake_amount)) * delta + default_offset;
-
+	if menu_cam == false:
+		offset = Vector2(rand_range(-shake_amount, shake_amount), rand_range(shake_amount, -shake_amount)) * delta + default_offset;
+	
+	
 func shake(new_shake, shake_time=0.4, shake_limit=100):
 	shake_amount += new_shake;
 	if shake_amount > shake_limit:

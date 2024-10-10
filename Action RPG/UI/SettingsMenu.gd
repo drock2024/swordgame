@@ -5,10 +5,19 @@ var mouse_in_slider := false;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var font = DynamicFont.new();
+	var small_font = DynamicFont.new()
 	font.font_data = load ("res://UI/alagard.ttf");
-	$VBoxContainer/Fullscreen.set("custom_fonts/font", font);
+	small_font.font_data = load ("res://UI/alagard.ttf");
+	small_font.size = 12
 	$VBoxContainer/MasterVolume.set("custom_fonts/font", font);
-	$MainMenu.set("custom_fonts/font", font);
+	$VBoxContainer/Fullscreen.set("custom_fonts/font", font);
+	$Controls.set("custom_fonts/font", font);
+	$Move.set("custom_fonts/font", small_font);
+	$Roll.set("custom_fonts/font", small_font);
+	$Ability.set("custom_fonts/font", small_font);
+	$Heal.set("custom_fonts/font", small_font);
+	$MainMenu.set("custom_fonts/font", small_font);
+	$Attack.set("custom_fonts/font", small_font);
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Effects"), 0)
 
 func _input(event):
@@ -47,3 +56,8 @@ func _on_EnableFullscreen_toggled(button_pressed):
 
 func _on_MainMenu_pressed():
 	get_tree().change_scene("res://Menu.tscn");
+
+
+func _on_FullscreenButton_pressed():
+	OS.window_fullscreen = !OS.window_fullscreen;
+	PlayerStats.fullscreen = !PlayerStats.fullscreen;

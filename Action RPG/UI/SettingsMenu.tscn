@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://World/GrassBackground.png" type="Texture" id=1]
 [ext_resource path="res://UI/SettingsMenu.gd" type="Script" id=2]
@@ -10,6 +10,14 @@
 [ext_resource path="res://Camera2D.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Effects/light.png" type="Texture" id=9]
 [ext_resource path="res://Music and Sounds/campfirewav.wav" type="AudioStream" id=10]
+[ext_resource path="res://UI/KeySprites/Skey.png" type="Texture" id=11]
+[ext_resource path="res://UI/KeySprites/Wkey.png" type="Texture" id=12]
+[ext_resource path="res://UI/KeySprites/Dkey.png" type="Texture" id=13]
+[ext_resource path="res://UI/KeySprites/Ctrl.png" type="Texture" id=14]
+[ext_resource path="res://UI/KeySprites/Shift.png" type="Texture" id=15]
+[ext_resource path="res://UI/KeySprites/Fkey.png" type="Texture" id=16]
+[ext_resource path="res://UI/KeySprites/Akey.png" type="Texture" id=17]
+[ext_resource path="res://UI/KeySprites/Space.png" type="Texture" id=18]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.286275, 0.764706, 0.282353, 1 )
@@ -35,10 +43,11 @@ region_rect = Rect2( 0, 0, 320, 192 )
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_top = -27.5
-margin_right = 116.0
-margin_bottom = 27.5
-custom_constants/separation = 32
+margin_left = 10.0
+margin_top = -46.0
+margin_right = 126.0
+margin_bottom = 14.0
+custom_constants/separation = 16
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -47,12 +56,14 @@ __meta__ = {
 margin_right = 116.0
 margin_bottom = 14.0
 text = "Master Volume:"
+valign = 1
 
 [node name="Fullscreen" type="Label" parent="VBoxContainer"]
-margin_top = 46.0
+margin_top = 30.0
 margin_right = 116.0
-margin_bottom = 60.0
-text = "Enable Fullscreen:"
+margin_bottom = 44.0
+text = "Fullscreen:"
+valign = 1
 
 [node name="MainMenu" type="Button" parent="."]
 anchor_left = 1.0
@@ -68,28 +79,27 @@ __meta__ = {
 }
 
 [node name="VolumeSlider" type="TextureProgress" parent="."]
-anchor_left = 0.4
-anchor_top = 0.356
-anchor_right = 0.4
-anchor_bottom = 0.356
-margin_top = -0.0800018
+margin_left = 64.0
+margin_top = 61.0
 margin_right = 128.0
-margin_bottom = 31.92
+margin_bottom = 69.0
 min_value = -50.0
 max_value = 0.0
 value = -25.0
 texture_under = ExtResource( 5 )
 texture_over = ExtResource( 3 )
 texture_progress = ExtResource( 4 )
+tint_progress = Color( 0, 1, 0.345098, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="EnableFullscreen" type="CheckButton" parent="."]
-margin_left = 136.0
-margin_top = 96.0
-margin_right = 212.0
-margin_bottom = 136.0
+margin_left = 93.0
+margin_top = 72.0
+margin_right = 169.0
+margin_bottom = 112.0
+rect_scale = Vector2( 0.5, 0.5 )
 custom_icons/off = ExtResource( 7 )
 custom_icons/on = ExtResource( 6 )
 __meta__ = {
@@ -99,7 +109,7 @@ __meta__ = {
 [node name="Camera2D" parent="." instance=ExtResource( 8 )]
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 320, 0 )
+position = Vector2( 168, 0 )
 texture = ExtResource( 9 )
 texture_scale = 0.4
 color = Color( 0.694118, 0.403922, 0.0627451, 1 )
@@ -111,6 +121,111 @@ color = Color( 0.396078, 0.396078, 0.396078, 1 )
 stream = ExtResource( 10 )
 autoplay = true
 bus = "Music"
+
+[node name="Controls" type="Label" parent="."]
+margin_left = 200.0
+margin_top = 44.0
+margin_right = 253.0
+margin_bottom = 58.0
+text = "Controls"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move" type="Label" parent="."]
+margin_left = 166.0
+margin_top = 100.0
+margin_right = 218.0
+margin_bottom = 114.0
+text = "Move"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack" type="Label" parent="."]
+margin_left = 264.0
+margin_top = 120.0
+margin_right = 307.0
+margin_bottom = 134.0
+text = "Attack"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Roll" type="Label" parent="."]
+margin_left = 264.0
+margin_top = 66.0
+margin_right = 310.0
+margin_bottom = 80.0
+text = "Roll"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ability" type="Label" parent="."]
+margin_left = 264.0
+margin_top = 84.0
+margin_right = 310.0
+margin_bottom = 98.0
+text = "Ability"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heal" type="Label" parent="."]
+margin_left = 264.0
+margin_top = 102.0
+margin_right = 320.0
+margin_bottom = 116.0
+text = "Heal"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyIcons" type="YSort" parent="."]
+position = Vector2( 194, 44 )
+
+[node name="Wkey" type="Sprite" parent="KeyIcons"]
+position = Vector2( -2, 28 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+
+[node name="Akey" type="Sprite" parent="KeyIcons"]
+position = Vector2( -20, 46 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 17 )
+
+[node name="Skey" type="Sprite" parent="KeyIcons"]
+position = Vector2( -2, 46 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="Dkey" type="Sprite" parent="KeyIcons"]
+position = Vector2( 16, 46 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 13 )
+
+[node name="Fkey" type="Sprite" parent="KeyIcons"]
+position = Vector2( 60, 64 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 16 )
+
+[node name="Ctrl" type="Sprite" parent="KeyIcons"]
+position = Vector2( 52, 28 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 14 )
+
+[node name="Shift" type="Sprite" parent="KeyIcons"]
+position = Vector2( 52, 46 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 15 )
+
+[node name="Space" type="Sprite" parent="KeyIcons"]
+position = Vector2( 52, 82 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 18 )
 [connection signal="pressed" from="MainMenu" to="." method="_on_MainMenu_pressed"]
 [connection signal="mouse_entered" from="VolumeSlider" to="." method="_on_VolumeSlider_mouse_entered"]
 [connection signal="mouse_exited" from="VolumeSlider" to="." method="_on_VolumeSlider_mouse_exited"]

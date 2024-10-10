@@ -3,7 +3,7 @@ extends "res://Enemies/Bat.gd"
 func _physics_process(delta):
 	match state:
 		IDLE:
-			$AnimatedSprite.play("Move2");
+			$AnimatedSprite.play("Idle");
 			$AnimatedSprite.stop();
 			$AnimatedSprite.set_frame(0);
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://World/GrassBackground.png" type="Texture" id=1]
 [ext_resource path="res://World/DirtPathTileMap.tscn" type="PackedScene" id=2]
@@ -7,11 +7,15 @@
 [ext_resource path="res://Camera2D.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/DirtCliffTileMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Overlap/DoorPoint.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/TestRoom.gd" type="Script" id=8]
 [ext_resource path="res://UI/ObjectiveUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://UI/DaggerUI.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Enemies/BatBoss/Pedestal.tscn" type="PackedScene" id=11]
+[ext_resource path="res://UI/CoinUI.tscn" type="PackedScene" id=12]
+[ext_resource path="res://World/Levels/FOrest/CanvasLayer.gd" type="Script" id=13]
 
 [node name="ForestBoss" type="Node2D"]
+script = ExtResource( 8 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 160.572, 90.4287 )
@@ -30,10 +34,10 @@ tile_data = PoolIntArray( -131071, 0, 0, -131070, 0, 1, -131069, 0, 5, -131068, 
 position = Vector2( 12, 80 )
 
 [node name="TopLeft" parent="Camera2D/Limits" index="0"]
-position = Vector2( -16, -32 )
+position = Vector2( -20, -27 )
 
 [node name="BottomRight" parent="Camera2D/Limits" index="1"]
-position = Vector2( 336, 192 )
+position = Vector2( 336, 193 )
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -47,6 +51,7 @@ remote_path = NodePath("../../../Camera2D")
 position = Vector2( 157, 74 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 13 )
 
 [node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 4 )]
 margin_left = 4.0
@@ -63,8 +68,26 @@ margin_bottom = 27.0
 [node name="DaggerUI" parent="CanvasLayer" instance=ExtResource( 10 )]
 margin_left = 271.0
 margin_top = 3.0
-margin_right = 352.0
+margin_right = 319.0
 margin_bottom = 19.0
+
+[node name="CoinUI" parent="CanvasLayer" instance=ExtResource( 12 )]
+margin_left = 271.0
+margin_top = 20.0
+margin_right = 270.88
+margin_bottom = 19.98
+
+[node name="BossName" type="Label" parent="CanvasLayer"]
+margin_left = 98.0
+margin_top = 146.0
+margin_right = 198.0
+margin_bottom = 160.0
+text = "Bat of the Night"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameTimer" type="Timer" parent="CanvasLayer"]
 
 [node name="DoorPoint" parent="." instance=ExtResource( 7 )]
 position = Vector2( -32, 80 )
@@ -77,7 +100,8 @@ position = Vector2( 160, 208 )
 rotation = 1.5708
 
 [node name="DoorPoint4" parent="." instance=ExtResource( 7 )]
-position = Vector2( 160, -16 )
+position = Vector2( 157, -23 )
 rotation = 1.5708
+[connection signal="timeout" from="CanvasLayer/NameTimer" to="CanvasLayer" method="_on_NameTimer_timeout"]
 
 [editable path="Camera2D"]

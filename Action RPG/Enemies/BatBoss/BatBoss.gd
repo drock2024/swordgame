@@ -30,15 +30,23 @@ func _ready():
 	var shadow = Shadow.instance();
 	add_child(shadow);
 	shadow.global_position = global_position + Vector2(0, 16);
+	$AudioStreamPlayer.play();
+	if PlayerStats.time_of_day == "night":
+		$AnimatedSprite.position.y += 24;
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta);
 	knockback = move_and_slide(knockback);
 	
+	$BossBar.value = stats.health;
+	
 	match state:
 		IDLE:
 			collision.disabled = false;
-			$AnimatedSprite.play("Idle");
+			if PlayerStats.time_of_day == "night":
+				$AnimatedSprite.play("BunnyIdle");
+			else:
+				$AnimatedSprite.play("Idle");
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			boss_stages();
 		
@@ -61,7 +69,10 @@ func _physics_process(delta):
 				$Hurtbox.set_process(true);
 				$Hitbox/CollisionShape2D.disabled = false;
 				$AnimatedSprite.show();
-				$AnimatedSprite.play("Idle");
+				if PlayerStats.time_of_day == "night":
+					$AnimatedSprite.play("BunnyIdle");
+				else:
+					$AnimatedSprite.play("Idle");
 				vel = position.direction_to(target) * speed
 				if position.distance_to(target) > 5:
 					vel = move_and_slide(vel)
@@ -92,6 +103,8 @@ func _physics_process(delta):
 						$Timer.start(1.75);
 		
 		ATTACK:
+			if PlayerStats.time_of_day == "night":
+				$AnimatedSprite.play("BunnyWalk");
 			collision.disabled = false;
 			if attackPos == 0:
 				target = Vector2(270, 115);
@@ -126,7 +139,10 @@ func _physics_process(delta):
 			collision.disabled = true;
 			if divePos == false:
 				target = Vector2(150, -128);
-				$AnimatedSprite.play("Idle");
+				if PlayerStats.time_of_day == "night":
+					$AnimatedSprite.play("BunnyIdle");
+				else:
+					$AnimatedSprite.play("Idle");
 				vel = position.direction_to(target) * 120;
 				if position.distance_to(target) > 5:
 					vel = move_and_slide(vel)
@@ -137,7 +153,10 @@ func _physics_process(delta):
 					batTarget.global_position = targets[diveSequence];
 			if divePos == true:
 				target = targets[diveSequence];
-				$AnimatedSprite.play("Dive");
+				if PlayerStats.time_of_day == "night":
+					$AnimatedSprite.play("BunnyIdle");
+				else:
+					$AnimatedSprite.play("Dive");
 				vel = position.direction_to(target) * 280;
 				if position.distance_to(target) > 5:
 					vel = move_and_slide(vel)
@@ -146,20 +165,29 @@ func _physics_process(delta):
 						$DiveTimer.start(0.5);
 						diveFlag = false;
 		CHARGE:
-			$AnimatedSprite.play("Idle");
+			if PlayerStats.time_of_day == "night":
+				$AnimatedSprite.play("BunnyIdle");
+			else:
+				$AnimatedSprite.play("Idle");
 			if playerDetectionZone.player != null:
 				collision.disabled = false;
 				if lungeReady == true:
 					if position.distance_to(target) > 4:
 						$AnimatedSprite.flip_h = chaseDir.x;
 						move_and_slide(chaseDir * 200);
+						if PlayerStats.time_of_day == "night":
+							$AnimatedSprite.play("BunnyWalk");
 					else:
 						lungeReady = false;
 						$LungeTimer.start(1);
+						if PlayerStats.time_of_day == "night":
+							$AnimatedSprite.play("BunnyIdle");
 
 func _on_Stats_no_health():
 	PlayerStats.bat_summoned = false;
 	PlayerStats.bat_defeated = true;
+	if PlayerStats.time_of_day == "night":
+		PlayerStats.night_boss = true;
 	queue_free();
 	var enemyDeathEffect = EnemyDeathEffect.instance();
 	PlayerStats.set_obj(PlayerStats.obj + 1)

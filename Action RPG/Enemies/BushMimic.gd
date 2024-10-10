@@ -3,9 +3,15 @@ extends "res://Enemies/Bat.gd"
 var wake_flag = false;
 
 func _ready():
+	print(find_parent("CurrentScene").get_child(0).name)
 	$AnimatedSprite.play("Idle")
-	#if PlayerStats.mimic_defeated == true:
-		#queue_free();
+	#check for previous deaths
+	if PlayerStats.first_mimic_defeated and find_parent("CurrentScene").get_child(1).name == "World":
+		queue_free();
+	if PlayerStats.second_mimic_defeated and find_parent("CurrentScene").get_child(1).name == "TestRoom2":
+		queue_free();
+	if PlayerStats.forest_mimic_defeated and find_parent("CurrentScene").get_child(1).name == "ForestRoom1":
+		queue_free();
 
 func _physics_process(delta):
 	match state:
@@ -44,4 +50,10 @@ func _on_Stats_no_health():
 	var enemyDeathEffect = EnemyDeathEffect.instance();
 	get_parent().add_child(enemyDeathEffect);
 	enemyDeathEffect.global_position = global_position;
-	PlayerStats.set_mimic(true);
+	print(find_parent("CurrentScene").get_child(0).name)
+	if find_parent("CurrentScene").get_child(0).name == "World":
+		PlayerStats.first_mimic_defeated = true; 
+	if find_parent("CurrentScene").get_child(0).name == "TestRoom2":
+		PlayerStats.second_mimic_defeated = true;
+	if find_parent("CurrentScene").get_child(0).name == "ForestRoom1":
+		PlayerStats.forest_mimic_defeated = true;

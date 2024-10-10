@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://UI/SlimeOrbs/BlueOrbEmpty.png" type="Texture" id=1]
+[ext_resource path="res://UI/SlimeOrbs/RedOrbEmpty.png" type="Texture" id=2]
+[ext_resource path="res://UI/OrbEmpty.png" type="Texture" id=3]
+[ext_resource path="res://UI/SlimeOrbs/RedOrb.png" type="Texture" id=4]
+[ext_resource path="res://UI/SlimeOrbs/BlueOrb.png" type="Texture" id=5]
+[ext_resource path="res://UI/OrbFull.png" type="Texture" id=6]
+[ext_resource path="res://UI/SlimeOrbs/SlimeOrbs.gd" type="Script" id=7]
+
+[node name="SlimeOrbs" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -255.0
+margin_bottom = -169.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlueOrbEmpty" type="TextureRect" parent="."]
+margin_right = 15.0
+margin_bottom = 11.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlueOrbFull" type="TextureRect" parent="."]
+visible = false
+margin_right = 15.0
+margin_bottom = 11.0
+texture = ExtResource( 5 )
+
+[node name="RedOrbEmpty" type="TextureRect" parent="."]
+margin_left = 13.0
+margin_right = 28.0
+margin_bottom = 11.0
+texture = ExtResource( 2 )
+
+[node name="RedOrbFull" type="TextureRect" parent="."]
+visible = false
+margin_left = 13.0
+margin_right = 28.0
+margin_bottom = 11.0
+texture = ExtResource( 4 )
+
+[node name="GreenOrbEmpty" type="TextureRect" parent="."]
+margin_left = 26.0
+margin_right = 41.0
+margin_bottom = 11.0
+texture = ExtResource( 3 )
+
+[node name="GreenOrbFull" type="TextureRect" parent="."]
+visible = false
+margin_left = 26.0
+margin_right = 41.0
+margin_bottom = 11.0
+texture = ExtResource( 6 )

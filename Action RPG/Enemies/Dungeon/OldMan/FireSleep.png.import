@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/FireSleep.png-82c4f926e614a8a31b3ac609fb05bffd.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Enemies/Dungeon/OldMan/FireSleep.png"
+dest_files=[ "res://.import/FireSleep.png-82c4f926e614a8a31b3ac609fb05bffd.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

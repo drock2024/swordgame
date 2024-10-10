@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/WolfUnhovered.png" type="Texture" id=1]
+[ext_resource path="res://World/Levels/FOrest/WolfMan.gd" type="Script" id=2]
+[ext_resource path="res://Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=3]
+
+[node name="WolfMan" type="Sprite"]
+visible = false
+position = Vector2( -17, 196 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 3 )]
+position = Vector2( -10, 6 )
+[connection signal="body_entered" from="PlayerDetectionZone" to="." method="_on_PlayerDetectionZone_body_entered"]
+[connection signal="body_exited" from="PlayerDetectionZone" to="." method="_on_PlayerDetectionZone_body_exited"]

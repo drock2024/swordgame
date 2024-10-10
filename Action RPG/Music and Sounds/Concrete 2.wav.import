@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Concrete 2.wav-eb8cbfebcd07e95b713a2ec1dfdc496b.sample"
+
+[deps]
+
+source_file="res://Music and Sounds/Concrete 2.wav"
+dest_files=[ "res://.import/Concrete 2.wav-eb8cbfebcd07e95b713a2ec1dfdc496b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

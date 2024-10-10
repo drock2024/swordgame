@@ -40,7 +40,7 @@ func _ready():
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta);
 	knockback = move_and_slide(knockback);
-	
+
 	match state:
 		IDLE:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -71,6 +71,7 @@ func accelerate_towards_point(point, delta):
 	var direction = global_position.direction_to(point);
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 	sprite.flip_h = velocity.x < 0
+	$Hitbox.k_vector = direction
 
 func update_wander():
 	state = pick_random_state([IDLE, WANDER])

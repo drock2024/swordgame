@@ -1,0 +1,208 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://World/GrassBackground.png" type="Texture" id=1]
+[ext_resource path="res://World/DirtPathTileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Camera2D.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/DirtCliffTileMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overlap/DoorPoint.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/TestRoom.gd" type="Script" id=8]
+[ext_resource path="res://World/Tree.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Enemies/Bunny.tscn" type="PackedScene" id=10]
+[ext_resource path="res://UI/ObjectiveUI.tscn" type="PackedScene" id=11]
+[ext_resource path="res://UI/DaggerUI.tscn" type="PackedScene" id=12]
+[ext_resource path="res://World/RockCliffTileMap.tscn" type="PackedScene" id=13]
+[ext_resource path="res://UI/WolfUnhovered.png" type="Texture" id=14]
+[ext_resource path="res://Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=15]
+[ext_resource path="res://World/Levels/FOrest/WolfMan.gd" type="Script" id=16]
+[ext_resource path="res://UI/CoinUI.tscn" type="PackedScene" id=17]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 28.0179
+
+[node name="ForestRoom2" type="Node2D"]
+script = ExtResource( 8 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 160.572, 90.4287 )
+scale = Vector2( 1.92289, 2.14011 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 352, 208 )
+
+[node name="DirtPathTileMap" parent="." instance=ExtResource( 2 )]
+tile_data = PoolIntArray( -196606, 0, 0, -196605, 0, 2, -131072, 0, 0, -131071, 0, 5, -131070, 0, 196614, -131069, 0, 196613, -131068, 0, 196610, -1, 0, 0, -65536, 0, 65545, -65535, 0, 131074, 65534, 0, 0, 65535, 0, 65545, 0, 0, 131074, 131069, 0, 196608, 131070, 0, 196614, 131071, 0, 131074, 65554, 0, 196611, 131089, 0, 3, 262140, 0, 3, 196624, 0, 196608, 196625, 0, 196616, 196626, 0, 196610, 327676, 0, 196612, 327677, 0, 196610 )
+
+[node name="DirtCliffTileMap" parent="." instance=ExtResource( 6 )]
+tile_data = PoolIntArray( -327680, 0, 4, -327679, 0, 196609, -327678, 0, 196609, -327677, 0, 7, -196610, 0, 0, -196609, 0, 1, -262144, 0, 131079, -262141, 0, 196612, -262140, 0, 196609, -262139, 0, 6, -262138, 0, 1, -262137, 0, 1, -262136, 0, 1, -262135, 0, 2, -131077, 0, 0, -131076, 0, 1, -131075, 0, 1, -131074, 0, 65545, -131073, 0, 131073, -196608, 0, 131074, -196603, 0, 131072, -196602, 0, 131073, -196601, 0, 65542, -196600, 0, 65537, -196599, 0, 65538, -65541, 0, 65536, -65540, 0, 65537, -65539, 0, 65541, -65538, 0, 131074, -131065, 0, 131072, -131064, 0, 131073, -131063, 0, 9, -131062, 0, 2, -5, 0, 65536, -4, 0, 65541, -3, 0, 131074, -65527, 0, 131072, -65526, 0, 196613, -65525, 0, 7, 65531, 0, 65536, 65532, 0, 65538, 11, 0, 65539, 131067, 0, 131072, 131068, 0, 131074, 65537, 0, 3, 65547, 0, 196612, 65548, 0, 196609, 65549, 0, 196610, 131072, 0, 0, 131073, 0, 131080, 131074, 0, 5, 131075, 0, 196610, 131086, 0, 3, 262139, 0, 0, 262140, 0, 2, 262143, 0, 0, 196608, 0, 131078, 196609, 0, 65537, 196610, 0, 65538, 196622, 0, 131075, 327675, 0, 131072, 327676, 0, 196613, 327677, 0, 6, 327678, 0, 5, 327679, 0, 196614, 262144, 0, 131073, 262145, 0, 131073, 262146, 0, 131074, 262151, 0, 0, 262152, 0, 1, 262153, 0, 2, 262155, 0, 4, 262156, 0, 196609, 262157, 0, 196610, 393213, 0, 65536, 393214, 0, 65538, 327686, 0, 0, 327687, 0, 131078, 327688, 0, 65537, 327689, 0, 131077, 327690, 0, 1, 327691, 0, 131079, 458749, 0, 65536, 458750, 0, 65538, 393222, 0, 65536, 393223, 0, 65537, 393224, 0, 65537, 393225, 0, 65537, 393226, 0, 65541, 393227, 0, 131074, 524285, 0, 131072, 524286, 0, 65543, 458756, 0, 0, 458757, 0, 1, 458758, 0, 131078, 458759, 0, 65537, 458760, 0, 65537, 458761, 0, 65541, 458762, 0, 131074, 589822, 0, 131075, 524292, 0, 131072, 524293, 0, 131073, 524294, 0, 131073, 524295, 0, 131073, 524296, 0, 131073, 524297, 0, 131074 )
+
+[node name="RockCliffTileMap" parent="." instance=ExtResource( 13 )]
+tile_data = PoolIntArray( 2, 0, 0, 3, 0, 2, 10, 0, 3, 65538, 0, 131072, 65539, 0, 131074, 65546, 0, 131075, 393215, 0, 196608, 327680, 0, 196609, 327681, 0, 196610 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( -80, 88 )
+
+[node name="TopLeft" parent="Camera2D/Limits" index="0"]
+position = Vector2( -112, -110 )
+
+[node name="BottomRight" parent="Camera2D/Limits" index="1"]
+position = Vector2( 386, 292 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="WolfMan" type="Sprite" parent="YSort"]
+visible = false
+position = Vector2( -17, 196 )
+texture = ExtResource( 14 )
+script = ExtResource( 16 )
+
+[node name="PlayerDetectionZone" parent="YSort/WolfMan" instance=ExtResource( 15 )]
+position = Vector2( -10, 6 )
+
+[node name="CollisionShape2D" parent="YSort/WolfMan/PlayerDetectionZone" index="0"]
+shape = SubResource( 1 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( -80, 88 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
+remote_path = NodePath("../../../Camera2D")
+
+[node name="Tree" type="YSort" parent="YSort"]
+
+[node name="Tree" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 104, 24 )
+
+[node name="Tree2" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 144, 27 )
+
+[node name="Tree3" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 160, 47 )
+
+[node name="Tree4" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 176, 57 )
+
+[node name="Tree5" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 192, 72 )
+
+[node name="Tree6" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 208, 88 )
+
+[node name="Tree7" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 144, -70 )
+
+[node name="Tree8" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 160, -50 )
+
+[node name="Tree9" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 176, -40 )
+
+[node name="Tree10" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 192, -25 )
+
+[node name="Tree11" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 208, -9 )
+
+[node name="Tree12" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 231, 1 )
+
+[node name="Tree13" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 261, 3 )
+
+[node name="Tree14" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( -17, 249 )
+
+[node name="Tree15" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( -1, 272 )
+
+[node name="Tree17" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 31, 282 )
+
+[node name="Tree18" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 47, 292 )
+
+[node name="Tree19" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 160, 249 )
+
+[node name="Tree20" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 111, 279 )
+
+[node name="Tree21" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 95, 292 )
+
+[node name="Tree22" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 70, 302 )
+
+[node name="Tree23" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( 15, 300 )
+
+[node name="Tree24" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( -17, 292 )
+
+[node name="Tree25" parent="YSort/Tree" instance=ExtResource( 9 )]
+position = Vector2( -64, 165 )
+
+[node name="Bunny" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 49, 223 )
+
+[node name="Bunny2" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 111, 141 )
+
+[node name="Bunny3" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 208, 148 )
+
+[node name="Bunny4" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 328, 98 )
+
+[node name="Bunny5" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 271, 32 )
+
+[node name="Bunny6" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 144, 82 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 4 )]
+margin_left = 4.0
+margin_top = 3.0
+margin_right = 85.0
+margin_bottom = 15.0
+
+[node name="OrbUI" parent="CanvasLayer" instance=ExtResource( 11 )]
+margin_left = 3.0
+margin_top = 15.0
+margin_right = 84.0
+margin_bottom = 27.0
+
+[node name="DaggerUI" parent="CanvasLayer" instance=ExtResource( 12 )]
+margin_left = 271.0
+margin_top = 3.0
+margin_right = 319.0
+margin_bottom = 19.0
+
+[node name="CoinUI" parent="CanvasLayer" instance=ExtResource( 17 )]
+margin_left = 271.0
+margin_top = 20.0
+margin_right = 270.88
+margin_bottom = 19.98
+
+[node name="DoorPoint" parent="." instance=ExtResource( 7 )]
+position = Vector2( -161, 83 )
+
+[node name="DoorPoint2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 429, 93 )
+
+[node name="DoorPoint3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 160, 300 )
+rotation = 1.5708
+
+[node name="DoorPoint4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 63, -110 )
+rotation = 1.5708
+[connection signal="body_entered" from="YSort/WolfMan/PlayerDetectionZone" to="YSort/WolfMan" method="_on_PlayerDetectionZone_body_entered"]
+[connection signal="body_exited" from="YSort/WolfMan/PlayerDetectionZone" to="YSort/WolfMan" method="_on_PlayerDetectionZone_body_exited"]
+
+[editable path="Camera2D"]
+
+[editable path="YSort/WolfMan/PlayerDetectionZone"]

@@ -53,7 +53,7 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 9 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 2 )]

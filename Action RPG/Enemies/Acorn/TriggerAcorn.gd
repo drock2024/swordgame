@@ -25,3 +25,4 @@ func _on_Stats_no_health():
 	five.global_position = global_position + Vector2(64, 64);
 	six.global_position = global_position - Vector2(64, 64);
 	enemyDeathEffect.global_position = global_position;
+	PlayerStats.trigger_acorn_defeated = true;

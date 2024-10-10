@@ -14,7 +14,7 @@ func _ready():
 
 
 func _on_PlayerDetectionZone_body_entered(body):
-	PlayerStats.money += 1;
+	PlayerStats.change_money(1);
 	var noise = Noise.instance();
 	get_parent().add_child(noise);
 	noise.global_position = body.global_position - Vector2(0,24);

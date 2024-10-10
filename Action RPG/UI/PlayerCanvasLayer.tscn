@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://UI/SlimeOrbs/SlimeOrbs.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/PlayerCanvasLayer.gd" type="Script" id=2]
+[ext_resource path="res://UI/CoinUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/ObjectiveUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/DaggerUI.tscn" type="PackedScene" id=6]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="HealthUI" parent="." instance=ExtResource( 5 )]
+margin_left = 4.0
+margin_top = 3.0
+margin_right = 85.0
+margin_bottom = 15.0
+
+[node name="OrbUI" parent="." instance=ExtResource( 4 )]
+margin_left = 3.0
+margin_top = 15.0
+margin_right = 84.0
+margin_bottom = 27.0
+
+[node name="SlimeOrbs" parent="." instance=ExtResource( 1 )]
+visible = false
+margin_left = 3.0
+margin_top = 15.0
+margin_right = -252.0
+margin_bottom = -154.0
+
+[node name="DaggerUI" parent="." instance=ExtResource( 6 )]
+margin_left = 271.0
+margin_top = 3.0
+margin_right = 319.0
+margin_bottom = 19.0
+
+[node name="CoinUI" parent="." instance=ExtResource( 3 )]
+margin_left = 271.0
+margin_top = 20.0
+margin_right = 270.88
+margin_bottom = 19.98
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 320.0
+margin_bottom = 180.0
+color = Color( 0.0627451, 0, 0.498039, 0.109804 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

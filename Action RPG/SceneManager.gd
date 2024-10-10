@@ -9,6 +9,8 @@ var section = 0;
 var pause_flag = false;
 var time_array = [];
 var save_array = [];
+var cutscene_flag = 0;
+var latest_move = "";
 
 var player_location = Vector2(0, 0);
 var player_direction = Vector2(0, 0);
@@ -19,10 +21,16 @@ var vert_index = 0;
 var rows = Player.room_array.size() - 1;
 var cols = Player.vert_array.size() - 1;
 
+#latest movement signals
+signal move_right;
+signal move_left;
+signal move_up;
+signal move_down;
+
 func _ready():
 	#player.connect("room_test", self, "player_change_room");
 	randomize();
-	Player.room_map.shuffle();
+	#Player.room_map.shuffle();
 	save_array = Player.room_map;
 	print(Player.room_map.size())
 	prev_scene = Player.current_room;
@@ -62,7 +70,7 @@ func _ready():
 	print(PlayerStats.time_of_day)
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("heal"):
+	if Input.is_action_just_pressed("heal") and PlayerStats.health > 0:
 		Player.healable = false;
 		Player.use_health_dagger();
 
@@ -70,34 +78,43 @@ func transition_to_scene(new_scene: String, spawn_location, spawn_direction):
 	next_scene = new_scene;
 	player_location = spawn_location;
 	player_direction = spawn_direction;
+	if spawn_location.x < 0:
+		cutscene_flag = 1;
+	$ScreenTransition/AnimationPlayer.play("FadeToBlack");
 	$ScreenTransition/AnimationPlayer.play("FadeToBlack");
 
 func finished_fading():
 	currentScene.get_child(0).queue_free();
 	currentScene.add_child(load(next_scene).instance());
-	
-	var player = $CurrentScene.get_children().back().find_node("Player")
-	player.set_spawn(player_location, player_direction)
+	if cutscene_flag != 1:
+		var player = $CurrentScene.get_children().back().find_node("Player")
+		player.set_spawn(player_location, player_direction);
 	
 	$ScreenTransition/AnimationPlayer.play("FadeToNormal");
 	if room_flag == 0:
 		hor_index += 1;
 		print("Right ", hor_index, vert_index)
+		emit_signal("move_right");
 	elif room_flag == 1:
 		hor_index -= 1;
 		print("Left ", hor_index, vert_index)
+		emit_signal("move_left");
 	elif room_flag == 2:
 		vert_index += 1;
 		print("Down ", hor_index, vert_index)
+		emit_signal("move_down");
 	elif room_flag == 3:
 		vert_index -= 1;
 		print("Up ", hor_index, vert_index)
+		emit_signal("move_up");
 	elif room_flag == 4:
 		hor_index = 1;
 		vert_index = 1;
 		print("Section back ", hor_index, vert_index)
+		
 
 func player_change_room(spawn_location, spawn_direction):
+	latest_move = "Right";
 	if hor_index < rows:
 		room_flag = 0;
 		transition_to_scene(Player.room_map[hor_index + 1][vert_index], spawn_location, spawn_direction);
