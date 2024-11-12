@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Enemies/Dungeon/OldMan/WardenDeathDialog.gd" type="Script" id=1]
+
+[node name="WardenDeathDialog" type="Control"]
+anchor_right = 0.45
+anchor_bottom = 0.267
+margin_bottom = -0.0600052
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_top = 3.0
+anchor_bottom = 3.0
+margin_left = 168.0
+margin_top = -7.99997
+margin_right = 312.0
+margin_bottom = 32.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="RichTextLabel" parent="ColorRect"]
+margin_left = 8.0
+margin_right = 72.0
+margin_bottom = 24.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="ColorRect"]
+margin_left = 8.0
+margin_top = 16.0
+margin_right = 133.0
+margin_bottom = 40.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Text and stuff"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Indicator" type="Polygon2D" parent="ColorRect"]
+position = Vector2( 133, 30 )
+scale = Vector2( 0.5, 0.5 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 0, 0, 8, 16, 16, 0 )
+
+[node name="Portrait" type="Sprite" parent="ColorRect"]
+
+[node name="Timer" type="Timer" parent="ColorRect"]
+[connection signal="text_finished" from="ColorRect" to="." method="_on_ColorRect_text_finished"]

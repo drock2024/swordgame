@@ -23,6 +23,7 @@ func _on_SpikesTimer_timeout():
 	if curr_state == 0:
 		curr_state = 1
 		hitbox.set_collision_mask_bit(2, true)
+		$AudioStreamPlayer2D.play()
 		timer.start(0.3)
 	elif curr_state == 1:
 		curr_state = 2

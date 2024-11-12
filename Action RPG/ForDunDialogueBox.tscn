@@ -1,0 +1,122 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ForDunDialog.gd" type="Script" id=1]
+[ext_resource path="res://IntroDialogue.gd" type="Script" id=2]
+[ext_resource path="res://UI/CharacterCards/SlotMachine.tscn" type="PackedScene" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 0.376471 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.427451, 0.905882, 0.45098, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.427451, 0.905882, 0.45098, 0.670588 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 0.109804 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 1, 1, 1, 1 )
+
+[node name="ForDunDialogBox" type="Control"]
+anchor_right = 0.45
+anchor_bottom = 0.267
+margin_left = 160.0
+margin_top = 128.0
+margin_right = 160.0
+margin_bottom = 127.94
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BetLow" type="Button" parent="."]
+visible = false
+margin_left = 160.0
+margin_top = 128.0
+margin_right = 223.0
+margin_bottom = 148.0
+focus_neighbour_bottom = NodePath("../BetHigh")
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = SubResource( 3 )
+text = "Bet Low"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BetHigh" type="Button" parent="."]
+visible = false
+margin_left = 160.0
+margin_top = 152.0
+margin_right = 223.0
+margin_bottom = 172.0
+focus_neighbour_top = NodePath("../BetLow")
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = SubResource( 3 )
+text = "Bet High"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SlotMachine" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_top = 3.0
+anchor_bottom = 3.0
+margin_left = 8.0
+margin_top = -136.0
+margin_right = 152.0
+margin_bottom = -96.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="RichTextLabel" parent="ColorRect"]
+margin_left = 8.0
+margin_right = 72.0
+margin_bottom = 24.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="ColorRect"]
+margin_left = 8.0
+margin_top = 16.0
+margin_right = 133.0
+margin_bottom = 40.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Text and stuff"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Indicator" type="Polygon2D" parent="ColorRect"]
+position = Vector2( 133, 30 )
+scale = Vector2( 0.5, 0.5 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 0, 0, 8, 16, 16, 0 )
+
+[node name="Portrait" type="Sprite" parent="ColorRect"]
+
+[node name="Timer" type="Timer" parent="ColorRect"]
+[connection signal="pressed" from="BetLow" to="." method="_on_BetLow_pressed"]
+[connection signal="pressed" from="BetHigh" to="." method="_on_BetHigh_pressed"]
+[connection signal="text_finished" from="ColorRect" to="." method="_on_ColorRect_text_finished"]

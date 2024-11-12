@@ -8,7 +8,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	PlayerStats.time_of_day = "day";
+	#PlayerStats.time_of_day = "day";
 	PlayerStats.area = "Dungeon"
 	Player.healable = true
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Effects"), 0)

@@ -13,6 +13,7 @@ func _ready():
 	$VBoxContainer/Fullscreen.set("custom_fonts/font", font);
 	$Controls.set("custom_fonts/font", font);
 	$Move.set("custom_fonts/font", small_font);
+	$MenuNav.set("custom_fonts/font", small_font);
 	$Roll.set("custom_fonts/font", small_font);
 	$Ability.set("custom_fonts/font", small_font);
 	$Heal.set("custom_fonts/font", small_font);

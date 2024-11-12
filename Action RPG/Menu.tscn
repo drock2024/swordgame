@@ -395,6 +395,7 @@ process_material = SubResource( 10 )
 [node name="Campfire" type="AnimatedSprite" parent="Light2D"]
 position = Vector2( 0, -8 )
 frames = SubResource( 17 )
+frame = 1
 playing = true
 
 [node name="ButtonSwitch" type="AudioStreamPlayer" parent="."]

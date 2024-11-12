@@ -10,4 +10,5 @@ func _on_SplashAnimation_animation_finished(anim_name):
 	#get_tree().change_scene("res://UI/CharacterCards/IntroDialogueScene.tscn")
 	#get_tree().change_scene("res://World/Levels/Dungeon/DungeonRoom1.tscn");
 	#get_tree().change_scene("res://World/Levels/Dungeon/DungeonBoss.tscn")
+	#get_tree().change_scene("res://UI/CharacterCards/ForDunDialogue.tscn");
 	#Player.set_physics_process(true);

@@ -4,9 +4,9 @@ export(int) var max_health = 1 setget set_max_health;
 export(int) var max_obj = 2 setget set_max_obj;
 export(int) var max_daggers = 3 setget set_max_daggers;
 var health = max_health setget set_health;
-var obj = 0 setget set_obj;
+var obj = 2 setget set_obj;
 var daggers = 1 setget set_daggers;
-var player_class = "";
+var player_class = "BASE";
 var volume = -30;
 var fullscreen = false;
 var time_of_day = "night";
@@ -22,6 +22,9 @@ var red_slime = false
 var green_slime = false
 var blue_slime = false
 var potion = false
+var prize = ""
+var prizeDialog = false
+var oldManDefeated = false;
 
 #Enemy persistence variables
 #Mimics
@@ -105,10 +108,12 @@ func reset():
 	forest_acorn_3 = false;
 	bat_summoned = false;
 	bat_defeated = false;
+	oldManDefeated = false;
 	orbInStock = true;
 	obj = 0;
 	daggers = 1;
 	player_class = "";
 	money = 0;
+	time_of_day = "day";
 	Camera2d.color.hide();
 

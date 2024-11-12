@@ -122,7 +122,6 @@ position = Vector2( 26, 111 )
 [node name="CooldownTimer" type="Timer" parent="."]
 
 [node name="Stats" parent="." instance=ExtResource( 10 )]
-max_health = 3
 
 [node name="Hurtbox" parent="." instance=ExtResource( 11 )]
 collision_layer = 8

@@ -7,6 +7,7 @@ onready var FireTrap = preload("res://Enemies/Dungeon/OldMan/OldManFire.tscn");
 #onready var swordbullet = SwordBullet.instance();
 onready var player = find_parent("DungeonBoss").get_child(4).find_node("Player")
 onready var Spitter = preload("res://Enemies/Dungeon/Spitter/Spitter.tscn")
+onready var deathEffect = preload("res://Effects/OldManDeathEffect.tscn");
 
 onready var shuffle_button = get_node("CanvasLayer/Button")
 onready var shuffle_card = get_node("CanvasLayer/ShuffleCard")
@@ -21,7 +22,7 @@ var phase_list = ["fire", "swords", "spitters"]
 var flame_limit = 5 
 var flame_counter = 1
 var fire_sort
-var spitter_limit = 10
+var spitter_limit = 8
 var spitter_count = 1
 var fire_trap
 var pos_list = [Vector2(32, 124), Vector2(162, 75), Vector2(292, 124), Vector2(162, 216)]
@@ -181,6 +182,7 @@ func _on_CooldownTimer_timeout():
 	between = true
 
 func startNextPhase():
+	spitter_count = 1
 	if between == true:
 		shield.visible = true
 		shield.set_collision_layer_bit(0, true)
@@ -195,4 +197,8 @@ func _on_Hurtbox_area_entered(area):
 
 
 func _on_Stats_no_health():
-	get_tree().change_scene("res://World/Levels/FOrest/CastleBackdrop.tscn")
+	var death = deathEffect.instance()
+	get_parent().add_child(death);
+	death.global_position = global_position
+	queue_free()
+	

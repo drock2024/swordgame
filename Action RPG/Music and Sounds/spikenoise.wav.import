@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/spikenoise.wav-c1f8a654161332173942a4a430a34da5.sample"
+
+[deps]
+
+source_file="res://Music and Sounds/spikenoise.wav"
+dest_files=[ "res://.import/spikenoise.wav-c1f8a654161332173942a4a430a34da5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

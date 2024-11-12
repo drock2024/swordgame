@@ -35,6 +35,6 @@ func _on_Timer_timeout():
 	$Timer.stop();
 
 func _on_Timer2_timeout():
-	PlayerStats.area = "Dungeon"
-	get_tree().change_scene("res://World/Levels/Dungeon/DungeonRoom1.tscn");
-	#PlayerStats.reset();
+	PlayerStats.area = ""
+	get_tree().change_scene("res://Menu.tscn");
+	PlayerStats.reset()

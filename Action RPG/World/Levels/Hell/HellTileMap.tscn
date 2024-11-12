@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://World/Levels/Hell/helltileset.png" type="Texture" id=1]
 [ext_resource path="res://World/Levels/Hell/hell_edge_left.png" type="Texture" id=2]
 [ext_resource path="res://World/Levels/Hell/hell_edge_right.png" type="Texture" id=3]
 [ext_resource path="res://World/Levels/Hell/hell_edge_bottom.png" type="Texture" id=4]
 [ext_resource path="res://World/Levels/Hell/lavasmall.png" type="Texture" id=5]
+[ext_resource path="res://World/Levels/Hell/lavasmall2.png" type="Texture" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -232,6 +233,20 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 4/shape_one_way_margin = 0.0
 4/shapes = [  ]
 4/z_index = 0
+5/name = "lavasmall2.png 5"
+5/texture = ExtResource( 6 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 0, 0, 16, 16 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0
 
 [node name="HellTileMap" type="TileMap"]
 tile_set = SubResource( 17 )

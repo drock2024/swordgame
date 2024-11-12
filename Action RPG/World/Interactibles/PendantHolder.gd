@@ -37,5 +37,5 @@ func _on_AnimatedSprite_animation_finished():
 		phase = 3;
 	elif phase == 3:
 		PlayerStats.health = 4
-		get_tree().change_scene("res://World/Levels/Dungeon/DungeonRoom1.tscn")
+		get_tree().change_scene("res://UI/CharacterCards/ForDunDialogue.tscn")
 		#get_node(NodePath("/root/SceneManager")).transition_to_scene("res://World/Levels/FOrest/CastleBackdrop.tscn", Vector2(-1, -1), Vector2(-1, -1));

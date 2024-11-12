@@ -8,10 +8,11 @@ func _ready():
 	$AnimationPlayer.play("Summon");
 
 func spawn_enemy():
-	self_modulate.a = 0;
 	if PlayerStats.time_of_day == "day":
 		var batInstance = Bat.instance();
-		self.add_child(batInstance);
+		add_child(batInstance);
+		batInstance.global_position = global_position;
 	else:
 		var bunnyInstance = Bunny.instance();
-		self.add_child(bunnyInstance);
+		add_child(bunnyInstance);
+		bunnyInstance.global_position = global_position;

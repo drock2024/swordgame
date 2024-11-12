@@ -18,7 +18,8 @@ enum {
 	ATTACK,
 	DIVE,
 	SUMMON,
-	CHARGE
+	CHARGE,
+	RETURN
 }
 
 var velocity = Vector2.ZERO;

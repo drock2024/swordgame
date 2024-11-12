@@ -43,7 +43,7 @@ position = Vector2( 331, 182 )
 [node name="YSort" type="YSort" parent="."]
 
 [node name="ShopKeeper" parent="YSort" instance=ExtResource( 9 )]
-position = Vector2( 160, 70 )
+position = Vector2( 159, 68 )
 
 [node name="Coin" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 230, 58 )
@@ -97,7 +97,6 @@ margin_bottom = 19.98
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
 volume_db = -2.0
-autoplay = true
 bus = "Music"
 
 [editable path="Camera2D"]

@@ -1,0 +1,165 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://WhiteColorShader.shader" type="Shader" id=1]
+[ext_resource path="res://Shadows/MediumShadow.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/Hell/Serpent/BoneSerpent.gd" type="Script" id=3]
+[ext_resource path="res://Enemies/WanderController.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Overlap/Hitbox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Overlap/SoftCollision.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Overlap/Hurtbox.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Enemies/Hell/Serpent/SnakeBump.png" type="Texture" id=10]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/active = false
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "hidden",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "head",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 7.28011
+
+[sub_resource type="CapsuleShape2D" id=4]
+height = 4.0
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 131.0
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 80.0562
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 18.1108
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 6.0
+
+[sub_resource type="Animation" id=9]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="BoneSerpent" type="KinematicBody2D"]
+collision_layer = 2147483664
+collision_mask = 0
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 0, 11 )
+scale = Vector2( 0.75, 0.75 )
+frames = SubResource( 2 )
+animation = "hidden"
+playing = true
+offset = Vector2( 0, -12 )
+
+[node name="Bump" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, 2 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 10 )
+
+[node name="ShadowSprite" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 8 )]
+position = Vector2( 0, 14 )
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0, -12 )
+shape = SubResource( 4 )
+
+[node name="Stats" parent="." instance=ExtResource( 7 )]
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 9 )]
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+modulate = Color( 1, 1, 1, 0.219608 )
+shape = SubResource( 5 )
+
+[node name="ShootDetectionZone" parent="." instance=ExtResource( 9 )]
+
+[node name="CollisionShape2D" parent="ShootDetectionZone" index="0"]
+modulate = Color( 1, 1, 1, 0.219608 )
+shape = SubResource( 6 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 5 )]
+collision_layer = 131072
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 7 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 6 )]
+visible = false
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource( 8 )
+
+[node name="WanderController" parent="." instance=ExtResource( 4 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Start = SubResource( 9 )
+anims/Stop = SubResource( 10 )
+
+[node name="ShotTimer" type="Timer" parent="."]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
+[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
+
+[editable path="Hurtbox"]
+
+[editable path="PlayerDetectionZone"]
+
+[editable path="ShootDetectionZone"]
+
+[editable path="Hitbox"]
+
+[editable path="SoftCollision"]

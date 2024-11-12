@@ -967,12 +967,12 @@ script = ExtResource( 2 )
 
 [node name="DungeonStep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
-volume_db = -24.0
+volume_db = -36.0
 script = ExtResource( 18 )
 
 [node name="Footstep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
-volume_db = -16.0
+volume_db = -24.0
 script = ExtResource( 16 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
@@ -984,7 +984,7 @@ material = SubResource( 1 )
 position = Vector2( 0, -9 )
 texture = ExtResource( 1 )
 hframes = 60
-frame = 36
+frame = 55
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5708

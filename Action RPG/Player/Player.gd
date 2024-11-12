@@ -188,7 +188,8 @@ func attack_animation_finished():
 	state = MOVE;
 
 func activate_ability():
-	$AbilityBar.show()
+	if CLASS != "BASE":
+		$AbilityBar.show();
 	if CLASS == "ROGUE":
 		$Sprite.modulate.a = 0.5;
 		abilityTimer.start(invis_length);

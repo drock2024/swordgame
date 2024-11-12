@@ -23,7 +23,7 @@ func _physics_process(delta):
 				if fired == false:
 					var bullet = Fireball.instance();
 					bullet.scale = Vector2(0.5, 0.5)
-					add_child(bullet)
+					get_parent().add_child(bullet)
 					bullet.dir = fire_dir;
 					bullet.global_position = global_position - Vector2(0,8);
 					fired = true;
